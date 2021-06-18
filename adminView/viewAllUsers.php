@@ -37,7 +37,7 @@
             </svg>
 
             <?php
-                echo "<h1><p>Witaj ".$_SESSION['name']."</h1>";             
+                echo "<h4><p>Witaj administratorze: </h4><h2>".$_SESSION['name']."</h2>";             
             ?>
 
         </div>

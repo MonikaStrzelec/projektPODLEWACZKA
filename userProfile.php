@@ -5,7 +5,6 @@ if(!isset($_SESSION['logged'])) //w każdej podstronie tylko dla zalogowanych
     header('Location: index.php');
     exit();
 }
-echo "zalogowany jest:".$_SESSION['logged']." imie: ".$_SESSION['name']." o radze: ".$_SESSION['userRank'];
 if(file_exists('templates/headerForUsers.php')) include('templates/headerForUsers.php');
 ?>
 

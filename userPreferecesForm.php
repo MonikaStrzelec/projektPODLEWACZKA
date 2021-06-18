@@ -1,12 +1,12 @@
 <?php
 session_start();
+require_once 'config/connect.php';
 if(!isset($_SESSION['logged'])) //w każdej podstronie tylko dla zalogowanych
 {
     header('Location: index.php');
     exit();
-} 
-echo "zalogowany jest:".$_SESSION['logged']." imie: ".$_SESSION['name']." o radze: ".$_SESSION['userRank'];
-require_once 'config/connect.php';
+}
+
 
 $id = $_SESSION['id'];
 //$mysqli="SELECT * FROM users WHERE id='$id'";

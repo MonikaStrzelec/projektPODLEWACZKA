@@ -33,7 +33,7 @@ $row = mysqli_fetch_array($query);
 </head>
 
 <body>
-<form class="loginForm" method="POST" action="update.php?id=<?php echo $id; ?>" enctype="multipart/form-data" autocomplete="off">>
+<form class="loginForm" method="POST" action="update.php?id=<?php echo $id; ?>" autocomplete="off">>
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('https://www.bracia.net.pl/wp-content/uploads/2018/10/zielone-tlo-196325.jpg')">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-30 p-b-30">
@@ -87,7 +87,7 @@ $row = mysqli_fetch_array($query);
 
                     <!-- password -->
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
-						<input class="input100" type="password" name="password" placeholder="Nowe hasło" autocomplete="new-password">
+						<input class="input100" type="password" name="password2" placeholder="Nowe hasło" autocomplete="new-password">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<span class="lnr lnr-lock"></span>

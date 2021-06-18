@@ -1,15 +1,13 @@
 <?php
     session_start();
-    if((!isset($_POST['userName'])) || (!isset($_POST['password'])))
-    {
+    require_once "../config/connect.php";    
+    if((!isset($_POST['userName'])) || (!isset($_POST['password']))){
         header('Location: ../index.php');
         exit();
     }
-    require_once "../config/connect.php";
     
     if ($mysqli->connect_errno!=0) {
         echo "Error".$mysqli->connect_errno."Opis: ".$mysqli->connect_error;
-        
     } else{
         $userName = $_POST['userName'];
         $password = $_POST['password'];
@@ -31,7 +29,6 @@
 
                 unset($_SESSION['loginError']); //usunięcie z sesji zmienną
                 $result->free_result();
-                //przekierowywujemy użytkownika
                 header('Location: ../index.php');
             } else{
                 $_SESSION['loginError']='<span style="color:red">Nieprawidłowe hasło!</span>';

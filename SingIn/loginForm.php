@@ -26,7 +26,7 @@
 </head>
 
 <body>
-<form class="loginForm" method="POST" action="autorization.php">
+<form class="loginForm" method="POST" action="loginAutorization.php">
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('https://www.bracia.net.pl/wp-content/uploads/2018/10/zielone-tlo-196325.jpg')">
 			<div class="wrap-login100 p-l-50 p-r-50 p-t-30 p-b-30">
