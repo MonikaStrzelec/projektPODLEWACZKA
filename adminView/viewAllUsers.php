@@ -47,7 +47,7 @@
             <div class="card">
                 <div class="card-header">
                     <br>
-                    <h3>Lista wszystkich uzytkowników</h3>
+                    <h3>Lista wszystkich użytkowników</h3>
                 </div>
                 <form action="deleteSelectedUsers.php" metod="POST" enctype="multipart/form-data">
                     <div class="card-body">
@@ -83,11 +83,55 @@
                                 ?>
                             </tbody>
                         </table>
-
                         <br>
                     </div>
                 </form>
             </div>
+    </section>
+
+    <section>
+        <div class="card card-header" style="text-align: right;">
+        <?php
+            $max_words = 2;
+            $max_length = 25;
+
+            if (!isset($_POST['submit'])){ ?>
+                <form action="" method="post"> 
+                    Wyszukuj po nicku: 
+                    <input type="post" style="width: 200px;" name="fraza" maxlength="'.$max_length.'"><br><br>
+                    <input type="submit" name="submit" class="btn btn-success" value="Szukaj"> 
+                </form>
+        <?php 
+            } else { 
+                $search_words = trim($_POST['fraza']);
+                $count_words = substr_count($search_words, ' ');
+                    
+                if (($count_words + 1) > ($max_words)){ 
+                    exit; 
+                }
+                $result = $mysqli->query("SELECT * FROM `users` WHERE userName LIKE '%$search_words%';");
+                $numberRows = $result->num_rows;
+
+                if ( $numberRows == 0 ) { 
+                    echo "Nie znaleziono użytkowników pasujących do wyszukiwania"; 
+                } else {
+                    while($row = $result->fetch_assoc())
+                    {
+                        $body_search .= $row['userName'].'<br>';
+                    }
+                    echo $userSearch = '<h3>Znaleziono '.$numberRows.' użytkowników pasujących do podanej frazy</h3><br><br>'
+                    .$body_search.''; ?>
+
+                    <form action="" method="post"> 
+                        Wyszukuj użytkowników po nicku: 
+                        <input type="post" style="width: 200px;" name="fraza" maxlength="'.$max_length.'"><br><br>
+                        <input type="submit" name="submit" class="btn btn-success" value="Szukaj"> 
+                    </form>
+        <?php
+                }
+            }
+        ?>
+        </div>
     </section>
 
     <br>

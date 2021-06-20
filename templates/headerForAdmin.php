@@ -23,7 +23,7 @@
                     <li class="nav-item"><a class="nav-link" href="<?php echo $url; ?>adminView/adminProfil.php">Profil administratora</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo $url; ?>adminView/viewAllUsers.php">Użytkownicy aplikacji</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?php echo $url; ?>adminView/registerAdmin.php">Rejestracja nowego admina</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?php echo $url; ?>logout.php">Wyloguj się</a></li>                
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $url; ?>logout.php">Wyloguj się</a></li>
                 </ul>
             </div>
         </div>

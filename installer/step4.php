@@ -8,7 +8,6 @@
 ?>
 
 <h3>Tworzenie struktury tabel</h3>
-Jeśli chces utworzyć strukturę tabel naciśnij "Utwórz"
 
 <br><br>
 <form action="step5.php" method="POST">

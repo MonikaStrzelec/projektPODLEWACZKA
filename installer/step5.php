@@ -51,18 +51,6 @@
     }
 ?>
 
-<!-- <br>
-<form action="step4.php" method="POST">
-    <button type="submit" name="next" class="btn btn-primary btn-lg">Powrót do poprzedniego kroku</button><br>
-</form>
-<br>
-<form action="../index.php" method="POST">
-    <button type="submit" name="next" class="btn btn-success btn-lg">Zakończ</button><br>
-    <h3>Gratulacja - instalacja zakończona</h3>
-    <h5>Po zakończeniu usuń folder "installer.php"!</h5>
-    <h5>Zmień prawa dostępu do "connect.php"</h5>
-</form> -->
-
 <br>
 <form action="step4.php" method="POST">
     <button type="submit" name="next" class="btn btn-primary btn-lg">Powrót do poprzedniego kroku</button>
