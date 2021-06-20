@@ -10,6 +10,7 @@ Serwer ma pobierać dane logowania od użytkownika i pozwalająca po zalogowaniu
 * wersja apache'a 
 * wersja PHP'a 7.2.24 
 * wersja MySQL: phpMyAdmin 5.0.2 z kodowaniem znaków UTF-8 Unicode (utfmb4)
+* w projekcie wykożystane jest API Open Weather Map
 
 ## Instalacja
 Instrukcja instalacji projektu, w tym do jakich plików i do jakich katalogów należy ustawić odpowiednie uprawnienia
