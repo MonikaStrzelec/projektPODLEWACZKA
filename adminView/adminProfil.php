@@ -76,8 +76,8 @@ if(file_exists('../templates/headerForAdmin.php')) include('../templates/headerF
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
-        </div>
         </div>
     </section>
 

@@ -11,5 +11,5 @@ if ($mysqli->connect_errno!=0) {
 echo "Error".$mysqli->connect_errno."Opis: ".$mysqli->connect_error;
 exit();}
 
-$url = "http://localhost/PROJEKTPODLEWACZKA/";
+// $url = "http://localhost/PROJEKTPODLEWACZKA/";
 ?>
