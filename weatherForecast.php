@@ -10,10 +10,9 @@ if(!isset($_SESSION['logged'])){
 	}
 }
 
- function getWatherByCityName ($cityName){
 	$curl = curl_init();
 	curl_setopt_array($curl, [
-		CURLOPT_URL => 'https://community-open-weather-map.p.rapidapi.com/find?q=' +$cityName+ '&cnt=15&mode=null&lon=0&type=link%2C%20accurate&lat=0&units=metric',
+		CURLOPT_URL => 'https://community-open-weather-map.p.rapidapi.com/find?q=lodz&cnt=15&mode=null&lon=0&type=link%2C%20accurate&lat=0&units=metric&lang=pl',
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_FOLLOWLOCATION => true,
 		CURLOPT_ENCODING => "",
@@ -30,39 +29,6 @@ if(!isset($_SESSION['logged'])){
 	$response = curl_exec($curl);
 	$err = curl_error($curl);
 	curl_close($curl);
-	if ($err) {
-		echo "cURL Error #:" . $err;
-	}
-	$oldData = json_decode($response);
-	$data = $oldData ->list[0];
-	$currentTime = time();
-	return $data;
- }
-
- 
-
-
-	$curl = curl_init();
-	curl_setopt_array($curl, [
-		CURLOPT_URL => 'https://community-open-weather-map.p.rapidapi.com/find?q=lodz&cnt=15&mode=null&lon=0&type=link%2C%20accurate&lat=0&units=metric',
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_ENCODING => "",
-		CURLOPT_MAXREDIRS => 10,
-		CURLOPT_TIMEOUT => 30,
-		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-		CURLOPT_CUSTOMREQUEST => "GET",
-		CURLOPT_HTTPHEADER => [
-			"x-rapidapi-host: community-open-weather-map.p.rapidapi.com",
-			"x-rapidapi-key: f63e430983msh02ccfee40012d8ap19b6f4jsne4035dc38ea5"
-		],
-	]);
-
-	$response = curl_exec($curl);
-	$err = curl_error($curl);
-
-	curl_close($curl);
-
 	if ($err) {
 		echo "cURL Error #:" . $err;
 	}
@@ -92,7 +58,6 @@ if(!isset($_SESSION['logged'])){
 
                         
 <br><br>
-
     <section>
         <div class="container overflow-hidden">
             <div class="row gy-5 ">
@@ -114,6 +79,7 @@ if(!isset($_SESSION['logged'])){
 						<div class="time">
 							<div>Wilgotność: <h2><?php echo $data->main->humidity; ?> %</h2></div>
 							<div>Wiatr: <h2><?php echo $data->wind->speed; ?> km/h</h2></div>
+							<br>
 						</div>
 					</div>
                 	</div>
@@ -147,28 +113,101 @@ if(!isset($_SESSION['logged'])){
 					$max_length = 15;
 
 					if (!isset($_POST['submit'])){ ?>
-				<form action="" method="post"> 
-                <div class="card-body">
-					<input type="post" style="width: 200px;" name="cityName" maxlength="'.$max_length.'">
-                    <div class="d-grid">
-					<br>
-						<input type="submit" name="submit" class="btn btn-success" value="Pokaż pogodę"> 
-                    </div>
-                </div>
-				</form>
+						<form action="" method="post"> 
+						<div class="card-body">
+							<input type="post" style="width: 200px;" name="cityName" maxlength="'.$max_length.'">
+							<div class="d-grid">
+							<br>
+								<input type="submit" name="submit" class="btn btn-success" value="Pokaż pogodę"> 
+							</div>
+						</div>
+						</form>
 				<?php 
 					} else { //pobrana nazwa miasta
-						$cityName = ($_POST['cityName']);
-						echo getWatherByCityName($cityName);
-					}
+						$curl2 = curl_init();
+						$cityName = $_POST['cityName'];    
+						//$cityName = ($_POST['cityName']);
+						curl_setopt_array($curl2, [
+							CURLOPT_URL => 'https://community-open-weather-map.p.rapidapi.com/forecast?q='.$cityName.'&lat=0&units=metric&lang=pl',
+							CURLOPT_RETURNTRANSFER => true,
+							CURLOPT_FOLLOWLOCATION => true,
+							CURLOPT_ENCODING => "",
+							CURLOPT_MAXREDIRS => 10,
+							CURLOPT_TIMEOUT => 30,
+							CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+							CURLOPT_CUSTOMREQUEST => "GET",
+							CURLOPT_HTTPHEADER => [
+								"x-rapidapi-host: community-open-weather-map.p.rapidapi.com",
+								"x-rapidapi-key: f63e430983msh02ccfee40012d8ap19b6f4jsne4035dc38ea5"
+							],
+							]);
+
+						$response = curl_exec($curl2);
+						$oldData = json_decode($response);
+						$data = $oldData ->list[0];
+						$currentTime = time();
+					
 				?>
+		<div class="container overflow-hidden">
+            <div class="row gy-5 ">
+                <div class="col-md-12 col-lg-6">
+				<div class="card">
+					<div class="report-container text-center">
+					<br><br>
+						<h3>Pogoda dla: </h3><h1><?php echo $oldData->city->name; ?></h1>
+						<div class="time">
+							<div><?php echo date("l G:i ", $currentTime); ?></div>
+						</div>
+						<div class="weather-forecast" >
+							<br><br>
+							<img
+								class="weather-icon" /> <br>Aktualnie temperatura wynosi: <h2><?php echo $data->main->temp; ?>°C </h2><br>
+								<!-- <span class="min-temperature"><?php echo $data->main->temp_min; ?>°C</span> -->
+						</div>
+						<div class="time">
+							<div>Wilgotność: <h2><?php echo $data->main->humidity; ?> %</h2></div>
+							<div>Wiatr: <h2><?php echo $data->wind->speed; ?> km/h</h2></div>
+							<br>
+						</div>
+					</div>
+                	</div>
+                </div>
+                <div class="col-md-12 col-lg-6">
+                    <div class="card text-center">
+                    <br>
+					<img src="http://openweathermap.org/img/w/<?php echo $data->weather[0]->icon; ?>.png" width="500" height="500" class="weather-icon" />
+						<h2><?php echo ucwords($data->weather[0]->description); ?></h2>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+				<?php } ?>
+			</div>
+
+
+
+
+<section>
+    <div class="container overflow-hidden">
+        <div class="row gy-5">
+            <div class="card text-center">
+                <div class="card-header">
+                        <h5>WYŚWIETL POGODĘ GODZINOWĄ</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid">
+					<a href="weatherEveryHour.php" class="btn btn-success">Pokaż szczegółową prognozę pogody</a>
+                    </div>
+                </div>
+
 				</div>
             </div>
         </div>
     </div>
 </section>
-
-
 
 <?php
     if(file_exists('templates/footer.php')) include('templates/footer.php');
